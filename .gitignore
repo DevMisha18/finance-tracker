@@ -1,4 +1,5 @@
 # Logs
+src/index.css
 logs
 *.log
 npm-debug.log*
