@@ -8,7 +8,7 @@ export default function NavButton({ name, imgPath }) {
                  hover:cursor-pointer hover:bg-[rgba(0,0,0,0.2)]"
     >
       <img src={imgPath} />
-      <p className="text-xs">{name}</p>
+      <p className="text-xs font-bold">{name}</p>
     </div>
   );
 }

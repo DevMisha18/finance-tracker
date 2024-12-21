@@ -6,7 +6,7 @@ export default function NavBar({ NavButton }) {
   return (
     <nav
       className="grid grid-cols-3
-                 border-t-2 border-black"
+                 border-t-4 border-[#333]"
     >
       {navButtonsName.map((name) => {
         const assetsPath = "/public/assets/";
