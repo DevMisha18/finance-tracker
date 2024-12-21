@@ -1,13 +1,13 @@
-import Transaction from "./ExpenseCard";
+import TransactionCard from "./TransactionCard";
 
 export default function Transactions() {
   return (
     <>
       <header>Total: 452PLN</header>
       <article className="flex flex-col ">
-        <Transaction expenseType="shop" money={450} />
-        <Transaction expenseType="health" money={450} />
-        <Transaction expenseType="publicTransport" money={50} />
+        <TransactionCard expenseType="shop" money={450} />
+        <TransactionCard expenseType="health" money={450} />
+        <TransactionCard expenseType="salary" money={40000} color="green" />
       </article>
     </>
   );

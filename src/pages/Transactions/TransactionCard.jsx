@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import salary from "./assets/types/salary.svg";
 import shop from "./assets/types/shop.svg";
 import health from "./assets/types/health.svg";
 import housing from "./assets/types/housing.svg";
@@ -7,6 +8,7 @@ import publicTransport from "./assets/types/public transport.svg";
 import travel from "./assets/types/travel.svg";
 
 const iconMap = {
+  salary,
   shop,
   health,
   housing,
@@ -15,7 +17,12 @@ const iconMap = {
   travel,
 };
 
-export default function ExpenseCard({ expenseType, money }) {
+const textColors = {
+  green: "text-green-600",
+  red: "text-red-600",
+};
+
+export default function ExpenseCard({ expenseType, money, color }) {
   return (
     <div
       className="flex justify-between items-center gap-6
@@ -27,15 +34,20 @@ export default function ExpenseCard({ expenseType, money }) {
           alt={`${expenseType} Icon`}
           className="size-full"
         />
-        <p className="text-lg font-semibold text-gray-800">{expenseType}</p>
+        <p className={`text-lg font-semibold text-gray-800`}>{expenseType}</p>
       </div>
-      <p className="text-lg font-bold text-red-600">{money} PLN</p>
+      <p className={`text-lg font-bold ${textColors[color]}`}>{money} PLN</p>
     </div>
   );
 }
 
+ExpenseCard.defaultProps = {
+  color: "red",
+};
+
 ExpenseCard.propTypes = {
   expenseType: PropTypes.oneOf([
+    "money",
     "shop",
     "health",
     "housing",
@@ -44,4 +56,5 @@ ExpenseCard.propTypes = {
     "travel",
   ]).isRequired,
   money: PropTypes.number.isRequired,
+  color: PropTypes.oneOf(["green", "red"]),
 };
