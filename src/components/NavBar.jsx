@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export default function NavBar({ NavButton }) {
-  const navButtonsName = ["transaction", "charts", "profile"];
+  const navButtonsName = ["transactions", "charts", "profile"];
   return (
     <nav
       className="grid grid-cols-3
@@ -11,11 +12,12 @@ export default function NavBar({ NavButton }) {
         const assetsPath = "/public/assets/";
         const ext = ".svg";
         return (
-          <NavButton
-            key={name}
-            name={name}
-            imgPath={assetsPath.concat(name).concat(ext)}
-          />
+          <Link to={`/${name}`} key={name}>
+            <NavButton
+              name={name}
+              imgPath={assetsPath.concat(name).concat(ext)}
+            />
+          </Link>
         );
       })}
     </nav>
