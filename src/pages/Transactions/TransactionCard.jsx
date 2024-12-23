@@ -22,7 +22,7 @@ const textColors = {
   red: "text-red-600",
 };
 
-export default function ExpenseCard({ expenseType, money, color }) {
+export default function ExpenseCard({ expenseType, money, color = "red" }) {
   return (
     <div
       className="flex justify-between items-center gap-6
@@ -41,13 +41,9 @@ export default function ExpenseCard({ expenseType, money, color }) {
   );
 }
 
-ExpenseCard.defaultProps = {
-  color: "red",
-};
-
 ExpenseCard.propTypes = {
   expenseType: PropTypes.oneOf([
-    "money",
+    "salary",
     "shop",
     "health",
     "housing",

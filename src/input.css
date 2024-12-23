@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --phone-width: 375px;
+  --phone-height: 667px;
+  --phone-padding: 0.75rem;
+  --phone-border: 4px;
+  --content-padding: 1rem;
+  --form-width: calc(
+    var(--phone-width) - 2 *
+      (var(--phone-padding) + var(--phone-border) + var(--content-padding))
+  );
+}
+
+@layer components {
+  .form__icon {
+    @apply p-2 border-2 border-[#333] rounded-full hover:cursor-pointer;
+  }
+}
+
+@layer utilities {
+  .border-phone {
+    border: var(--phone-border) solid #333;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-spin,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+  }
+}

@@ -15,10 +15,10 @@ export default function App() {
     <BrowserRouter>
       <main
         className="flex flex-col justify-between
-                 mx-auto w-1/4 h-[600px]
-                 border-4 border-[#333] rounded-xl"
+                 mx-auto w-[var(--phone-width)] h-[var(--phone-height)]
+                 border-phone rounded-xl"
       >
-        <div className="pt-3 px-3">
+        <div className="pt-[var(--phone-padding)] px-[var(--phone-padding)]">
           <Routes>
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/charts" element={<Charts />} />
