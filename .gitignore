@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 src/index.css
+# dotenv environment variables file
+.env
+.env.test
