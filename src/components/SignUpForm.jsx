@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signUpUser, signInUser } from "../services/authService";
+import { setUpUser } from "../services/dbService";
 
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
@@ -15,10 +16,13 @@ export default function SignUpForm() {
       return;
     }
     try {
-      await signUpUser(email, password);
+      const userCredentials = await signUpUser(email, password);
+      const uid = userCredentials.user.uid;
+      setUpUser(uid);
     } catch (err) {
       console.log(err.message);
     }
+    setUpUser;
   };
 
   const handleSignInSubmit = async (e) => {
