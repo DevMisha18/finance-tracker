@@ -28,8 +28,7 @@ export default function SignUpForm() {
   const handleSignInSubmit = async (e) => {
     e.preventDefault();
     try {
-      const a = await signInUser(email, password);
-      console.log(a);
+      await signInUser(email, password);
     } catch (err) {
       setError("wrong email or password");
       console.log(err);

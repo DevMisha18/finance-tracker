@@ -14,7 +14,7 @@ export default function TransactionForm({
   setSwitchToButtons,
   showForm,
   setShowForm,
-  transactionType,
+  transactionType, // true - income, false - expense
 }) {
   const uid = useAuth().user.uid;
   const [moneyInputValue, setMoneyInputValue] = useState("");
@@ -33,14 +33,18 @@ export default function TransactionForm({
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const types = [
-      "shop",
-      "health",
-      "housing",
-      "entertainment",
-      "publicTransport",
-      "travel",
+      [
+        "shop",
+        "health",
+        "housing",
+        "entertainment",
+        "publicTransport",
+        "travel",
+      ],
+      ["income"],
     ];
-    const type = types[formImgSelected] || "shop";
+    // +bool - converts to number
+    const type = types[+transactionType][formImgSelected] || "shop";
     const money = moneyInputValue;
     addExpense(uid, type, money);
     setSwitchToButtons(false); // for button to appear
