@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { addExpense } from "../../services/dbService";
 import salary from "./assets/types/salary.svg";
 import shop from "./assets/types/shop.svg";
 import health from "./assets/types/health.svg";
@@ -8,7 +10,13 @@ import publicTransport from "./assets/types/public transport.svg";
 import travel from "./assets/types/travel.svg";
 import PropTypes from "prop-types";
 
-export default function TransactionForm({ showForm, transactionType }) {
+export default function TransactionForm({
+  setSwitchToButtons,
+  showForm,
+  setShowForm,
+  transactionType,
+}) {
+  const uid = useAuth().user.uid;
   const [moneyInputValue, setMoneyInputValue] = useState("");
   const [formImgSelected, setFormImgSelected] = useState(0);
   const expenseImgs = [
@@ -21,9 +29,32 @@ export default function TransactionForm({ showForm, transactionType }) {
   ];
   const incomeImgs = [salary];
   const formImgs = transactionType ? incomeImgs : expenseImgs;
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const types = [
+      "shop",
+      "health",
+      "housing",
+      "entertainment",
+      "publicTransport",
+      "travel",
+    ];
+    const type = types[formImgSelected] || "shop";
+    const money = moneyInputValue;
+    addExpense(uid, type, money);
+    setSwitchToButtons(false); // for button to appear
+    // hide + reset form
+    setShowForm(false);
+    setMoneyInputValue("");
+    setFormImgSelected(0);
+  };
   return (
     showForm && (
-      <form className="absolute top-8 w-[var(--form-width)] px-4 py-3 bg-red-100 rounded-xl">
+      <form
+        className="absolute top-8 w-[var(--form-width)] px-4 py-3 bg-red-100 rounded-xl"
+        onSubmit={handleFormSubmit}
+      >
         <input
           required
           type="number"
@@ -69,6 +100,8 @@ export default function TransactionForm({ showForm, transactionType }) {
 }
 
 TransactionForm.propTypes = {
+  setSwitchToButtons: PropTypes.func.isRequired,
   showForm: PropTypes.bool.isRequired,
+  setShowForm: PropTypes.func.isRequired,
   transactionType: PropTypes.bool.isRequired,
 };
