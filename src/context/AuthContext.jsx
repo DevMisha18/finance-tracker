@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
+export function useAuth() {
+  return useContext(AuthContext);
+}
+
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
@@ -25,7 +29,3 @@ export default function AuthProvider({ children }) {
 AuthProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
-
-export function useAuth() {
-  return useContext(AuthContext);
-}

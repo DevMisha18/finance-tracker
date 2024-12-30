@@ -1,5 +1,5 @@
 import LogOutButton from "./LogOutButton";
-import TransactionCard from "./TransactionCard";
+// import TransactionCard from "./TransactionCard";
 import AddTransctionButton from "./AddTransactionButton";
 
 export default function Transactions() {
@@ -14,19 +14,6 @@ export default function Transactions() {
           className="flex flex-col gap-1 h-[450px]
                      overflow-y-scroll no-scrollbar"
         >
-          <TransactionCard expenseType="shop" money={450} />
-          <TransactionCard expenseType="health" money={450} />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
-          <TransactionCard expenseType="salary" money={40000} color="green" />
           <AddTransctionButton />
         </article>
       </div>
