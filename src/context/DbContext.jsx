@@ -1,6 +1,6 @@
 // dbContext.js
 import { createContext, useState, useEffect, useContext } from "react";
-import { getUserData, addTransaction } from "./dbService";
+import { getUserData, addTransaction } from "../services/dbService";
 import PropTypes from "prop-types";
 
 const DbContext = createContext();
@@ -21,8 +21,8 @@ export function DbProvider({ children, uid }) {
   }, [uid]);
 
   const addExpense = async (transaction) => {
-    await addTransaction(uid, transaction);
-    setTransactions((prev) => [...prev, transaction]); // Optimistic update
+    addTransaction(uid, transaction);
+    setTransactions((prev) => [...prev, transaction]);
   };
 
   return (
@@ -33,6 +33,6 @@ export function DbProvider({ children, uid }) {
 }
 
 DbProvider.propTypes = {
-  children: PropTypes.element.isRequired,
-  uid: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  uid: PropTypes.string,
 };

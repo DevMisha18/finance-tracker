@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
+import { DbProvider } from "./context/DbContext";
 import SignUpForm from "./components/SignUpForm";
 import Transactions from "./pages/Transactions";
 import NavBar from "./components/NavBar";
@@ -7,12 +8,16 @@ import NavButton from "./components/NavButton";
 
 export default function App() {
   const { user } = useAuth();
+  let uid = "";
+  if (user) uid = user.uid;
 
   const Charts = function () {
-    return <h1>Charts</h1>;
+    return (
+      <h1>Supposed to show charts for you expenses info, not done yet😭</h1>
+    );
   };
   const Profile = function () {
-    return <h1>Profile</h1>;
+    return <h1>Supposed to show profile info, not done yet😭</h1>;
   };
 
   return (
@@ -25,13 +30,15 @@ export default function App() {
         {!user ? (
           <SignUpForm />
         ) : (
-          <div className="pt-[var(--phone-padding)] px-[var(--phone-padding)]">
-            <Routes>
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/charts" element={<Charts />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </div>
+          <DbProvider uid={uid}>
+            <div className="pt-[var(--phone-padding)] px-[var(--phone-padding)]">
+              <Routes>
+                <Route path="/transactions" element={<Transactions />} />
+                <Route path="/charts" element={<Charts />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+            </div>
+          </DbProvider>
         )}
         <NavBar NavButton={NavButton} />
       </main>

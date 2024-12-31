@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { addExpense } from "../../services/dbService";
+import { useDb } from "../../context/DbContext";
 import salary from "./assets/types/salary.svg";
 import shop from "./assets/types/shop.svg";
 import health from "./assets/types/health.svg";
@@ -16,7 +15,7 @@ export default function TransactionForm({
   setShowForm,
   transactionType, // true - income, false - expense
 }) {
-  const uid = useAuth().user.uid;
+  const { addExpense } = useDb();
   const [moneyInputValue, setMoneyInputValue] = useState("");
   const [formImgSelected, setFormImgSelected] = useState(0);
   const expenseImgs = [
@@ -41,12 +40,16 @@ export default function TransactionForm({
         "publicTransport",
         "travel",
       ],
-      ["income"],
+      ["salary"],
     ];
     // +bool - converts to number
     const type = types[+transactionType][formImgSelected] || "shop";
-    const money = moneyInputValue;
-    addExpense(uid, type, money);
+    const money =
+      type === "salary"
+        ? Math.abs(moneyInputValue)
+        : -Math.abs(moneyInputValue);
+
+    addExpense({ type, money, timestamp: getLocalTimestamp() });
     setSwitchToButtons(false); // for button to appear
     // hide + reset form
     setShowForm(false);
@@ -109,3 +112,12 @@ TransactionForm.propTypes = {
   setShowForm: PropTypes.func.isRequired,
   transactionType: PropTypes.bool.isRequired,
 };
+
+// Mimicing firestore serverTimestamp()
+function getLocalTimestamp() {
+  const now = Date.now();
+  return {
+    seconds: Math.floor(now / 1000),
+    nanoseconds: (now % 1000) * 1e6,
+  };
+}

@@ -17,7 +17,8 @@ async function setUpUser(uid) {
 }
 
 // creates subcollection "expenses" and adds expense to it
-function addTransaction(uid, type, money) {
+function addTransaction(uid, transaction) {
+  const { type, money } = transaction;
   if (!uid || !type || !money) {
     console.error("Invalid data: Missing uid, type, or money");
     console.log("uid: " + uid);
@@ -42,7 +43,6 @@ const getUserData = async (uid) => {
   querySnapshot.forEach((doc) => {
     expenses.push(doc.data());
   });
-  console.log(expenses);
   return expenses;
 };
 
