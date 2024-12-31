@@ -21,7 +21,7 @@ export default function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/finance-tracker">
       <main
         className="flex flex-col justify-between
                  mx-auto w-[var(--phone-width)] h-[var(--phone-height)]
