@@ -9,7 +9,7 @@ export default function NavBar({ NavButton }) {
                  border-t-4 border-[#333]"
     >
       {navButtonsName.map((name) => {
-        const assetsPath = "/assets/";
+        const assetsPath = `/finance-tracker/assets/`;
         const ext = ".svg";
         return (
           <Link to={`/${name}`} key={name}>

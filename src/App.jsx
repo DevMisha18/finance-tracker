@@ -10,6 +10,7 @@ export default function App() {
   const { user } = useAuth();
   let uid = "";
   if (user) uid = user.uid;
+  // const isProduction = import.meta.env.MODE === "production";
 
   const Charts = function () {
     return (
@@ -19,9 +20,8 @@ export default function App() {
   const Profile = function () {
     return <h1>Supposed to show profile info, not done yet😭</h1>;
   };
-
   return (
-    <BrowserRouter basename="/finance-tracker">
+    <BrowserRouter basename={"/finance-tracker"}>
       <main
         className="flex flex-col justify-between
                  mx-auto w-[var(--phone-width)] h-[var(--phone-height)]
