@@ -3,23 +3,15 @@ import { useAuth } from "./context/AuthContext";
 import { DbProvider } from "./context/DbContext";
 import SignUpForm from "./components/SignUpForm";
 import Transactions from "./pages/Transactions";
+import Charts from "./pages/Charts";
+import Profile from "./pages/Profile";
 import NavBar from "./components/NavBar";
 import NavButton from "./components/NavButton";
 
 export default function App() {
   const { user } = useAuth();
-  let uid = "";
-  if (user) uid = user.uid;
-  // const isProduction = import.meta.env.MODE === "production";
+  const uid = user?.uid ?? "";
 
-  const Charts = function () {
-    return (
-      <h1>Supposed to show charts for you expenses info, not done yet😭</h1>
-    );
-  };
-  const Profile = function () {
-    return <h1>Supposed to show profile info, not done yet😭</h1>;
-  };
   return (
     <BrowserRouter basename={"/finance-tracker"}>
       <main
