@@ -25,8 +25,8 @@ export default function PieChart() {
     d3.select(svgRef.current).selectAll("*").remove();
 
     // Set up SVG container with larger dimensions
-    const w = 200; // Increased width
-    const h = 200; // Increased height
+    const w = 200;
+    const h = 200;
     const radius = Math.min(w, h) / 2;
     const svg = d3
       .select(svgRef.current)
@@ -45,12 +45,19 @@ export default function PieChart() {
     const arcGenerator = d3.arc().innerRadius(0).outerRadius(radius);
     const color = d3.scaleOrdinal().range(d3.schemeSet2);
 
-    // Draw pie slices
+    // Draw pie slices with animation
     g.selectAll("path")
       .data(formattedData)
       .join("path")
-      .attr("d", arcGenerator)
-      .attr("fill", (d) => color(d.data.type));
+      .attr("fill", (d) => color(d.data.type))
+      .transition()
+      .duration(800)
+      .attrTween("d", function (d) {
+        const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d); // Animate from 0 to final angles
+        return function (t) {
+          return arcGenerator(interpolate(t));
+        };
+      });
 
     // Create Legend
     const legend = svg
@@ -67,17 +74,17 @@ export default function PieChart() {
     // Add colored squares to legend
     legendItems
       .append("rect")
-      .attr("width", 18) // Increased size of legend boxes
+      .attr("width", 18)
       .attr("height", 18)
       .attr("fill", (d) => color(d.data.type));
 
     // Add text labels to legend
     legendItems
       .append("text")
-      .attr("x", 30) // Adjusted position for larger boxes
+      .attr("x", 30)
       .attr("y", 12)
       .attr("dy", "0.35em")
-      .style("font-size", "14px") // Increased font size
+      .style("font-size", "14px")
       .text((d) => d.data.type);
   }, [transactions]);
 
