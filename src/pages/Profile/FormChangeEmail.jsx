@@ -15,8 +15,8 @@ export default function FormChangeEmail({ setShowEmailForm }) {
     e.preventDefault();
     // Checks
     if (newEmail !== confirmEmail) return setError("Emails don't match");
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(newEmail) || !emailRegex.test(confirmEmail))
       return setError("Invalid email provided");
 
@@ -44,9 +44,9 @@ export default function FormChangeEmail({ setShowEmailForm }) {
     <>
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="mt-14 p-4 rounded-lg bg-white text-lg font-medium"
+        className="mt-14 p-4 rounded-lg bg-white  font-medium"
       >
-        <div className="flex justify-between pb-6">
+        <div className="flex justify-between gap-2 pb-6">
           <label htmlFor="email">New email</label>
           <input
             type="email"
@@ -56,7 +56,7 @@ export default function FormChangeEmail({ setShowEmailForm }) {
             onChange={(e) => setNewEmail(e.target.value)}
           />
         </div>
-        <div className="flex justify-between pb-6">
+        <div className="flex justify-between gap-2 pb-6">
           <label htmlFor="confirm-email">Confirm email</label>
           <input
             type="email"
@@ -66,7 +66,7 @@ export default function FormChangeEmail({ setShowEmailForm }) {
             onChange={(e) => setConfirmEmail(e.target.value)}
           />
         </div>
-        <div className="flex justify-between pb-14">
+        <div className="flex justify-between gap-2 pb-14">
           <label htmlFor="password">Password</label>
           <input
             type="password"

@@ -29,7 +29,7 @@
   }
 
   .form-input {
-    @apply py-[2px] px-2 border border-black rounded-lg text-sm font-normal outline-none;
+    @apply h-7 py-[2px] px-2 border border-black rounded-lg text-sm font-normal outline-none;
   }
 }
 

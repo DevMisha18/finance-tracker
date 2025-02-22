@@ -15,13 +15,19 @@ export default function Profile() {
         <div className="flex justify-center gap-4">
           <button
             className="change-x-btn"
-            onClick={() => setShowEmailForm(true)}
+            onClick={() => {
+              setShowEmailForm(true);
+              setShowPasswordForm(false);
+            }}
           >
             change email
           </button>
           <button
             className="change-x-btn"
-            // onClick={() => <FormChangeX field="password" />}
+            onClick={() => {
+              setShowEmailForm(false);
+              setShowPasswordForm(true);
+            }}
           >
             change password
           </button>
